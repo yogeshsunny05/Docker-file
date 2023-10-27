@@ -1,0 +1,29 @@
+# Use the Debian base image
+FROM debian
+
+# Set labels for author and email
+LABEL author="Mithun Technologies"
+LABEL mail="devopstrainingblr@gmail.com"
+
+# Update package lists and install git and wget
+RUN echo "Running One"
+RUN apt update -y && apt install -y git wget
+
+# Create a directory /app
+RUN echo "Running Two"
+RUN mkdir /app
+
+# Copy the test.sh script to /app directory
+COPY test.sh /app/test.sh
+
+# Set the environment variable PATH
+ENV PATH="/app:$PATH"
+
+# Make the test.sh script executable
+RUN echo "Running Three"
+RUN chmod +x /app/test.sh
+
+# Define the default command to run when the container starts
+CMD ["test.sh"]
+
+
